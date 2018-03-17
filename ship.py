@@ -28,15 +28,10 @@ class Ship():
 
     def update(self):
         """Update the ship's position based on the movement flag."""
-        # XXX not sure how the temporary storage in self.center helps
 
         if self.moving_right and self.rect.right < self.screen_rect.right:
-            #self.rect.centerx += 1
-            #self.rect.centerx += self.ai_settings.ship_speed_factor
             self.centerx += self.ai_settings.ship_speed_factor
         if self.moving_left and self.rect.left > self.screen_rect.left:
-            #self.rect.centerx -= 1
-            #self.rect.centerx -= self.ai_settings.ship_speed_factor
             self.centerx -= self.ai_settings.ship_speed_factor
         if self.moving_up and self.rect.top > self.screen_rect.top:
             self.centery -= self.ai_settings.ship_speed_factor
