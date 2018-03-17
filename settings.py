@@ -10,3 +10,4 @@ class Settings():
 
         #Ship settings
         self.ship_speed_factor = 2.5
+        self.vertical_movements_permitted = False
