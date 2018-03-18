@@ -20,9 +20,9 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Respond to keypresses."""
     if event.key == pygame.K_RIGHT:
         # Move the ship to the right
-        ship.moving_right = True
+        ship.move_right(True)
     elif event.key == pygame.K_LEFT:
-        ship.moving_left = True
+        ship.move_left(True)
     elif event.key == pygame.K_UP:
         ship.move_up(True)
     elif event.key == pygame.K_DOWN:
@@ -38,9 +38,9 @@ def fire_bullet(ai_settings, screen, ship, bullets):
 
 def check_keyup_events(event, ship):
     if event.key == pygame.K_RIGHT:
-        ship.moving_right = False
+        ship.move_right(False)
     elif event.key == pygame.K_LEFT:
-        ship.moving_left = False
+        ship.move_left(False)
     elif event.key == pygame.K_UP:
         ship.move_up(False)
     elif event.key == pygame.K_DOWN:
@@ -57,10 +57,14 @@ def update_screen(ai_settings, screen, ship, bullets):
     # Make the most recently draw screen visible
     pygame.display.flip()
 
-def update_bullets(bullets):
+def update_bullets(ai_settings, screen, bullets):
     bullets.update()
     for bullet in bullets.copy():
-        if bullet.rect.bottom <= 0:
-            bullets.remove(bullet)
+        if not ai_settings.sideways_shooter:
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+        else:
+            if bullet.rect.left >= screen.get_rect().right:
+                bullets.remove(bullet)
 
 

@@ -2,19 +2,24 @@ import pygame
 
 class Ship():
 
-    def __init__(self, ai_settings, screen):
+    def __init__(self, ai_settings, screen, sideways=False):
         """Initialize the ship and set its starting position."""
         self.screen = screen
         self.ai_settings = ai_settings
+        self.sideways = sideways
 
         #Load the ship image and get is rect.
         self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        # Start each new ship at the bottom scenter of the screen.
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        if self.sideways:
+            self.rect.left = self.screen_rect.left
+            self.rect.centery = self.screen_rect.centery
+        else:
+            # Start each new ship at the bottom scenter of the screen.
+            self.rect.centerx = self.screen_rect.centerx
+            self.rect.bottom = self.screen_rect.bottom
 
         # Store a decimal value for the ship's center.
         self.centerx = float(self.rect.centerx)
@@ -40,6 +45,18 @@ class Ship():
 
         self.rect.centerx = self.centerx
         self.rect.centery = self.centery
+
+    def move_left(self, toggle):
+        if self.ai_settings.horizontal_movements_permitted and toggle:
+            self.moving_left = True
+        else:
+            self.moving_left = False
+
+    def move_right(self, toggle):
+        if self.ai_settings.horizontal_movements_permitted and toggle:
+            self.moving_right = True
+        else:
+            self.moving_right = False
 
     def move_up(self, toggle):
         if self.ai_settings.vertical_movements_permitted and toggle:

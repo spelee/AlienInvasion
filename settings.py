@@ -8,9 +8,13 @@ class Settings():
         self.screen_height = 800
         self.bg_color = (230, 230, 230)
 
+        # Game settings
+        self.sideways_shooter = False
+
         #Ship settings
         self.ship_speed_factor = 2.5
         self.vertical_movements_permitted = False
+        self.horizontal_movements_permitted = True
 
         # Bullet settings
         self.bullet_speed_factor = 1
